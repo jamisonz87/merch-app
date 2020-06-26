@@ -1,0 +1,92 @@
+{% extends "store/base.html" %}
+{% load static %}
+{% block title %}View Product | Buy Merch {% endblock %}
+
+{% block body %}
+<div class="row">
+	<div class="col-lg-12">
+		<ol class="breadcrumb">
+			<li>
+				<a href="./">Home</a>
+			</li>
+			<li class="active">View Product</li>
+		</ol>
+	</div>
+</div>
+
+<div class="row pad">
+	<div class="col-lg-5">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<div class="thumbnail">
+				<img src="{{ product.image.url }}" alt="">
+			</div>
+		</div>
+	</div>
+
+	<div class="col-lg-7">
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<h3 class="panel-title">Product Details</h3>
+			</div>
+			
+			<div class="panel-body">
+				<h3>{{ product.name }} &nbsp;
+				{% if product.stock > 0 %}
+					<small>(In Stock)</small>
+				{% endif %}
+				</h3> 
+				<h4>&dollar;{{ product.price }}</h4>
+				<hr />
+				{{ product.description }}
+				<hr />
+				
+				<form method="POST" action="">
+				{% csrf_token %}
+				<div class="row">
+					<div class="col-lg-4">
+						<div class="row">
+							<div class="col-lg-12">
+								Stock
+							</div>
+							<div class="col-lg-12">
+								{{ form.num_of_items }}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="panel-footer">
+				<button type="submit" class="btn btn-primary">
+					<i class="glyphicon glyphicon-shopping-cart"></i> Add To Cart
+				</button>
+			</div>
+			</form>
+		</div>
+		
+		<div role="tabpanel">
+			<!-- Nav tabs -->
+			<ul class="nav nav-tabs" role="tablist">
+				<li role="presentation" class="active">
+					<a href="#description" aria-controls="description" role="tab" data-toggle="tab">Product Description</a>
+				</li>
+				<li role="presentation">
+					<a href="#shipping" aria-controls="shipping" role="tab" data-toggle="tab">Shipping Details</a>
+				</li>
+			</ul>
+		
+			<!-- Tab panes -->
+			<div class="tab-content">
+				<div role="tabpanel" class="tab-pane active" id="description">
+					<h3>Product Description</h3>
+					{{ product.description }}
+				</div>
+				<div role="tabpanel" class="tab-pane" id="shipping">
+					<h3>Shipping Details</h3>
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+{% endblock %}
